@@ -1,14 +1,19 @@
 package com.crystianemeira.movie_catalog.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.crystianemeira.movie_catalog.model.Movie;
+import com.crystianemeira.movie_catalog.repository.Movies;
 
 @Controller
 @RequestMapping("/movies")
 public class MovieController {
+	
+	@Autowired
+	private Movies movies;
 	
 	/**
 	 * Open the screen to add a new movie
@@ -27,8 +32,7 @@ public class MovieController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String save(Movie movie) {
-		// TODO: save
-		System.out.println(">>> " + movie.getTitle());
+		movies.save(movie);
 		
 		return "RegisterMovie";
 	}
