@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 <title>Add a new movie</title>
@@ -19,6 +20,10 @@
 	</nav>
 	
 	<form class="form-horizontal" method="POST" action="/movies">
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
+			<span th:text="${message}">Movie registered!!</span>
+		</div>
+	
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h1 class="panel-title">New movie</h1>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.crystianemeira.movie_catalog.model.Movie;
 import com.crystianemeira.movie_catalog.repository.Movies;
@@ -28,12 +29,12 @@ public class MovieController {
 	/**
 	 * Save data about a movie into the database
 	 * 
-	 * @return String name of a View
+	 * @return ModelAndView name of a View and a message
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(Movie movie) {
+	public ModelAndView save(Movie movie) {
 		movies.save(movie);
 		
-		return "RegisterMovie";
+		return new ModelAndView("RegisterMovie").addObject("message", "Movie registered!");
 	}
 }
