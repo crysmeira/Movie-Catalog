@@ -46,8 +46,7 @@
 					<label for="status" class="col-sm-1 control-label">Status</label>
 					<div class="col-sm-2">
 						<select class="form-control" name="status">
-							<option value="WATCHED">Watched</option>
-							<option value="NOT_WATCHED">Not watched</option>
+							<option th:each="status : ${allStatusMovie}" th:value="${status}" th:text="${status.description}" />
 						</select>
 					</div>
 				</div>
