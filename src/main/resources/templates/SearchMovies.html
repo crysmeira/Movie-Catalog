@@ -27,8 +27,17 @@
 					</tr>
 				</thead>
 				<tbody>
+					<tr th:each="movie : ${movies}">
+						<td class="text-center" th:text="${movie.id}">1</td>
+						<td th:text="${movie.title}"></td>
+						<td class="text-center" th:text="${movie.genre}"></td>
+						<td class="text-center">
+							<span class="label" th:text="${movie.status.description}" th:classappend="${movie.watched ? 'label-success' : 'label-danger'}"></span>
+						</td>
+						<td class="text-center"></td>
+					</tr>
 					<tr>
-						<td colspan="6">No movie found</td>
+						<td colspan="6" th:if="${#lists.isEmpty(movies)}">No movie found</td>
 					</tr>
 				</tbody>
 			</table>

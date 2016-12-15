@@ -46,11 +46,12 @@ public class MovieController {
 	/**
 	 * Open the screen that show all the movies
 	 * 
-	 * @return String name of a View responsible for showing the movies
+	 * @return ModelAndView name of a View responsible for showing the movies and a list of all the movies
 	 */
 	@RequestMapping
-	public String search() {
-		return "SearchMovies";
+	public ModelAndView search() {
+		List<Movie> allMovies = movies.findAll();
+		return new ModelAndView("SearchMovies").addObject("movies", allMovies);
 	}
 	
 	@ModelAttribute("allStatusMovie")

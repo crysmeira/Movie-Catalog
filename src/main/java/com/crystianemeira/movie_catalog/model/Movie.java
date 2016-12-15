@@ -53,6 +53,10 @@ public class Movie {
 		this.status = status;
 	}
 
+	public boolean isWatched() {
+		return StatusMovie.WATCHED.equals(this.status);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
