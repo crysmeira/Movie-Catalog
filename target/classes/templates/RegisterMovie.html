@@ -1,24 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="DefaultLayout">
 <head>
-	<meta charset="UTF-8" />
 	<title>Add a new movie</title>
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
-<body>
-
-	<nav class="navbar navbar-inverse navbar-static-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">
-					<img alt="Crystiane" src="/images/logo-crystiane.png" />
-				</a>
-			</div>
-		</div>
-	</nav>
-	
+<section layout:fragment="content">
 	<form class="form-horizontal" method="POST" action="/movies">
 		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
 			<span th:text="${message}">Movie registered!!</span>
@@ -26,7 +14,10 @@
 	
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h1 class="panel-title">New movie</h1>
+				<div class="clearfix">
+					<h1 class="panel-title movie-panel">New movie</h1>
+					<a class="btn btn-link link-panel" href="/movies">Back to search</a>
+				</div>
 			</div>
 			
 			<div class="panel-body">
@@ -58,8 +49,5 @@
 			</div>
 		</div>
 	</form>
-
-	<script src="/js/jquery-3.1.1.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-</body>
+</section>
 </html>
