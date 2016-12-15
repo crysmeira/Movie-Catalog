@@ -43,6 +43,16 @@ public class MovieController {
 		return new ModelAndView("RegisterMovie").addObject("message", "Movie registered!");
 	}
 	
+	/**
+	 * Open the screen that show all the movies
+	 * 
+	 * @return String name of a View responsible for showing the movies
+	 */
+	@RequestMapping
+	public String search() {
+		return "SearchMovies";
+	}
+	
 	@ModelAttribute("allStatusMovie")
 	public List<StatusMovie> allStatusMovie() {
 		return Arrays.asList(StatusMovie.values());
