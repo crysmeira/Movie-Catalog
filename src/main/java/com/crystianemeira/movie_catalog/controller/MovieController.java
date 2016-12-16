@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,11 +26,12 @@ public class MovieController {
 	/**
 	 * Open the screen to add a new movie
 	 * 
-	 * @return String name of a View responsible for adding a new movie
+	 * @return ModelAndView name of a View responsible for adding a new movie and an instance of Movie
 	 */
 	@RequestMapping("/new")
-	public String newMovie() {
-		return "RegisterMovie";
+	public ModelAndView newMovie() {
+		ModelAndView mv = new ModelAndView("RegisterMovie");
+		return mv.addObject(new Movie());
 	}
 	
 	/**
@@ -37,10 +40,15 @@ public class MovieController {
 	 * @return ModelAndView name of a View and a message
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView save(Movie movie) {
+	public ModelAndView save(@Validated Movie movie, Errors errors) {
+		ModelAndView mv = new ModelAndView("RegisterMovie");
+		if (errors.hasErrors()) {
+			return mv;
+		}
+		
 		movies.save(movie);
 		
-		return new ModelAndView("RegisterMovie").addObject("message", "Movie registered!");
+		return mv.addObject("message", "Movie registered!");
 	}
 	
 	/**
@@ -54,6 +62,11 @@ public class MovieController {
 		return new ModelAndView("SearchMovies").addObject("movies", allMovies);
 	}
 	
+	/**
+	 * Return a list with all movies
+	 * 
+	 * @return List<StatusMovie> list with all movies
+	 */
 	@ModelAttribute("allStatusMovie")
 	public List<StatusMovie> allStatusMovie() {
 		return Arrays.asList(StatusMovie.values());

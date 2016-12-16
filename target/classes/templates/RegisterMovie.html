@@ -7,10 +7,8 @@
 	<title>Add a new movie</title>
 </head>
 <section layout:fragment="content">
-	<form class="form-horizontal" method="POST" action="/movies">
-		<div class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
-			<span th:text="${message}">Movie registered!!</span>
-		</div>
+	<form class="form-horizontal" method="POST" action="/movies" th:object="${movie}">
+		<div layout:include="Message"></div>
 	
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -21,13 +19,13 @@
 			</div>
 			
 			<div class="panel-body">
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('title')} ? has-error">
 					<label for="title" class="col-sm-1 control-label">Title</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="title" name="title" />
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('genre')} ? has-error">
 					<label for="genre" class="col-sm-1 control-label">Genre</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" id="genre" name="genre" />

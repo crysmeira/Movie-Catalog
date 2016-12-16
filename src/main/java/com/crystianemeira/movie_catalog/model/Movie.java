@@ -6,6 +6,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Movie {
@@ -14,8 +17,12 @@ public class Movie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty(message = "Title cannot be empty")
+	@Size(max = 60, message = "Title cannot contains more than 60 characteres")
 	private String title;
 	
+	@NotEmpty(message = "Genre cannot be empty")
+	@Size(max = 20, message = "Genre cannot contains more than 20 characteres")
 	private String genre;
 	
 	@Enumerated(EnumType.STRING)
