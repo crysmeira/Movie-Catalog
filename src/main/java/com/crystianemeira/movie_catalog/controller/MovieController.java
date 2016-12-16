@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crystianemeira.movie_catalog.model.Movie;
 import com.crystianemeira.movie_catalog.model.StatusMovie;
@@ -37,18 +38,18 @@ public class MovieController {
 	/**
 	 * Save data about a movie into the database
 	 * 
-	 * @return ModelAndView name of a View and a message
+	 * @return String name of a View
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView save(@Validated Movie movie, Errors errors) {
-		ModelAndView mv = new ModelAndView("RegisterMovie");
+	public String save(@Validated Movie movie, Errors errors, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
-			return mv;
+			return "RegisterMovie";
 		}
 		
 		movies.save(movie);
+		attributes.addFlashAttribute("message", "Movie registered!");
 		
-		return mv.addObject("message", "Movie registered!");
+		return "redirect:/movies/new";
 	}
 	
 	/**
