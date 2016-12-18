@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,6 +62,12 @@ public class MovieController {
 	public ModelAndView search() {
 		List<Movie> allMovies = movies.findAll();
 		return new ModelAndView("SearchMovies").addObject("movies", allMovies);
+	}
+	
+	@RequestMapping("{id}")
+	public ModelAndView edit(@PathVariable("id") Movie movie) {
+		ModelAndView mv = new ModelAndView("RegisterMovie");
+		return mv.addObject(movie);
 	}
 	
 	/**

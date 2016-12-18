@@ -19,6 +19,8 @@
 			</div>
 			
 			<div class="panel-body">
+				<input type="hidden" th:field="*{id}"/>
+				
 				<div class="form-group" th:classappend="${#fields.hasErrors('title')} ? has-error">
 					<label for="title" class="col-sm-1 control-label">Title</label>
 					<div class="col-sm-4">
