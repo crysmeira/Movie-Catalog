@@ -28,7 +28,7 @@ public class MovieController {
 	/**
 	 * Open the screen to add a new movie
 	 * 
-	 * @return ModelAndView name of a View responsible for adding a new movie and an instance of Movie
+	 * @return ModelAndView the View responsible for registering a new movie and a new instance of Movie
 	 */
 	@RequestMapping("/new")
 	public ModelAndView newMovie() {
@@ -39,7 +39,11 @@ public class MovieController {
 	/**
 	 * Save data about a movie into the database
 	 * 
-	 * @return String name of a View
+	 * @param movie an instance of Movie
+	 * @param errors contains information about the object
+	 * @param attributes used to add attributes to the model
+	 * 
+	 * @return String the name of the View responsible for registering a new movie
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String save(@Validated Movie movie, Errors errors, RedirectAttributes attributes) {
@@ -56,7 +60,7 @@ public class MovieController {
 	/**
 	 * Open the screen that show all the movies
 	 * 
-	 * @return ModelAndView name of a View responsible for showing the movies and a list of all the movies
+	 * @return ModelAndView name of a View responsible for showing the movies and a list of all the movies to fill the View
 	 */
 	@RequestMapping
 	public ModelAndView search() {
@@ -64,10 +68,33 @@ public class MovieController {
 		return new ModelAndView("SearchMovies").addObject("movies", allMovies);
 	}
 	
+	/**
+	 * Edit a movie
+	 * 
+	 * @param movie an existing Movie object
+	 * 
+	 * @return ModelAndView the View responsible for register a movie
+	 */
 	@RequestMapping("{id}")
 	public ModelAndView edit(@PathVariable("id") Movie movie) {
 		ModelAndView mv = new ModelAndView("RegisterMovie");
 		return mv.addObject(movie);
+	}
+	
+	/**
+	 * Delete a movie
+	 * 
+	 * @param id the id of the movie to delete
+	 * @param attributes used to add attributes to the model
+	 * 
+	 * @return String the name of the View responsible for showing the movies
+	 */
+	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
+	public String delete(@PathVariable Long id, RedirectAttributes attributes) {
+		movies.delete(id);
+		attributes.addFlashAttribute("message", "Movie deleted!");
+		
+		return "redirect:/movies";
 	}
 	
 	/**

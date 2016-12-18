@@ -8,7 +8,8 @@
 </head>
 <section layout:fragment="content">
 	<form class="form-horizontal" method="POST" action="/movies" th:object="${movie}">
-		<div layout:include="Message"></div>
+		<div layout:include="MessageSuccess"></div>
+		<div layout:include="MessageError"></div>
 	
 		<div class="panel panel-default">
 			<div class="panel-heading">

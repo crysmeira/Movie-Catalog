@@ -7,6 +7,8 @@
 	<title>Search a movie</title>
 </head>
 <section layout:fragment="content">
+	<div layout:include="MessageSuccess"></div>
+	
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
@@ -38,6 +40,9 @@
 							<a class="btn btnk-link btn-xs" th:href="@{/movies/{id}(id=${movie.id})}">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</a>
+							<a class="btn btnk-link btn-xs" data-toggle="modal" data-target="#confirmDeletionModal" th:attr="data-id=${movie.id}, data-title=${movie.title}">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
 						</td>
 					</tr>
 					<tr>
@@ -46,6 +51,8 @@
 				</tbody>
 			</table>
 		</div>
+		
+		<div layout:include="DialogDeleteMovie"></div>
 	</div>	
 </section>
 </html>
