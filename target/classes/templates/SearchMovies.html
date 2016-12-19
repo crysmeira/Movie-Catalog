@@ -33,15 +33,18 @@
 						<td class="text-center" th:text="${movie.id}">1</td>
 						<td th:text="${movie.title}"></td>
 						<td class="text-center" th:text="${movie.genre}"></td>
-						<td class="text-center">
+						<td class="text-center" th:attr="data-role=${movie.id}">
 							<span class="label" th:text="${movie.status.description}" th:classappend="${movie.watched ? 'label-success' : 'label-danger'}"></span>
 						</td>
 						<td class="text-center">
-							<a class="btn btnk-link btn-xs" th:href="@{/movies/{id}(id=${movie.id})}">
+							<a class="btn btnk-link btn-xs" th:href="@{/movies/{id}(id=${movie.id})}" title="Edit" rel="tooltip" data-placement="top" >
 								<span class="glyphicon glyphicon-pencil"></span>
 							</a>
-							<a class="btn btnk-link btn-xs" data-toggle="modal" data-target="#confirmDeletionModal" th:attr="data-id=${movie.id}, data-title=${movie.title}">
+							<a class="btn btnk-link btn-xs" data-toggle="modal" data-target="#confirmDeletionModal" th:attr="data-id=${movie.id}, data-title=${movie.title}" title="Remove" rel="tooltip" data-placement="top">
 								<span class="glyphicon glyphicon-trash"></span>
+							</a>
+							<a class="btn btnk-link btn-xs js-update-status" th:if="${!movie.watched}" title="Check" rel="tooltip" data-placement="top" th:attr="data-id=${movie.id}" th:href="@{/movies/{id}/check(id=${movie.id})}">
+								<span class="glyphicon glyphicon-check"></span>
 							</a>
 						</td>
 					</tr>

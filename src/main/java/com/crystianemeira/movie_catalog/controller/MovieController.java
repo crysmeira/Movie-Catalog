@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crystianemeira.movie_catalog.model.Movie;
 import com.crystianemeira.movie_catalog.model.StatusMovie;
 import com.crystianemeira.movie_catalog.repository.Movies;
+import com.crystianemeira.movie_catalog.service.RegisterMovieService;
 
 @Controller
 @RequestMapping("/movies")
@@ -24,6 +26,9 @@ public class MovieController {
 	
 	@Autowired
 	private Movies movies;
+	
+	@Autowired
+	private RegisterMovieService registerMovieService;
 	
 	/**
 	 * Open the screen to add a new movie
@@ -51,7 +56,7 @@ public class MovieController {
 			return "RegisterMovie";
 		}
 		
-		movies.save(movie);
+		registerMovieService.save(movie);
 		attributes.addFlashAttribute("message", "Movie registered!");
 		
 		return "redirect:/movies/new";
@@ -89,12 +94,24 @@ public class MovieController {
 	 * 
 	 * @return String the name of the View responsible for showing the movies
 	 */
-	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public String delete(@PathVariable Long id, RedirectAttributes attributes) {
-		movies.delete(id);
+		registerMovieService.delete(id);
 		attributes.addFlashAttribute("message", "Movie deleted!");
 		
 		return "redirect:/movies";
+	}
+	
+	/**
+	 * Delete a movie
+	 * 
+	 * @param id the id of the movie to 
+	 * 
+	 * @return String description about the status of the movie
+	 */
+	@RequestMapping(value = "/{id}/check", method = RequestMethod.PUT)
+	public @ResponseBody String check(@PathVariable Long id) {
+		return registerMovieService.check(id);
 	}
 	
 	/**

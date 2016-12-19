@@ -14,3 +14,33 @@ $('#confirmDeletionModal').on('show.bs.modal', function (event) {
   form.attr('action', action + idMovie);
   modal.find('.modal-body span').html('Are you sure you want to delete the movie <strong>' + titleMovie + '</string>?');
 });
+
+// when the page is uploaded
+$(function() {
+	$('[rel="tooltip"]').tooltip();
+	
+	$('.js-update-status').on('click', function(event) {
+		event.preventDefault(); // avoid the default behavior
+		
+		var buttonCheck = $(event.currentTarget);
+		var urlCheck = buttonCheck.attr('href');
+		
+		// submit a PUT requisition in the url
+		var response = $.ajax({
+			url: urlCheck,
+			type: 'PUT'
+		});
+
+		response.done(function(e) {
+			var idMovie = buttonCheck.data('id');
+			$('[data-role=' + idMovie + ']').html('<span class="label label-success">' + e + '</span>');
+			buttonCheck.hide();
+		});
+		
+		response.fail(function(e) {
+			console.log(e);
+			alert('Error: It was not possible to chenge the status');
+		});
+		
+	});
+});
