@@ -1,11 +1,14 @@
 package com.crystianemeira.movie_catalog.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.crystianemeira.movie_catalog.model.Movie;
 import com.crystianemeira.movie_catalog.model.StatusMovie;
 import com.crystianemeira.movie_catalog.repository.Movies;
+import com.crystianemeira.movie_catalog.repository.filter.CatalogFilter;
 
 @Service
 public class RegisterMovieService {
@@ -43,5 +46,10 @@ public class RegisterMovieService {
 		movies.save(movie);
 		
 		return StatusMovie.WATCHED.getDescription();
+	}
+	
+	public List<Movie> filter(CatalogFilter filter) {
+		String title = (filter.getTitle() == null) ? "%" : filter.getTitle();
+		return movies.findByTitleContaining(title);
 	}
 }

@@ -17,15 +17,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crystianemeira.movie_catalog.model.Movie;
 import com.crystianemeira.movie_catalog.model.StatusMovie;
-import com.crystianemeira.movie_catalog.repository.Movies;
+import com.crystianemeira.movie_catalog.repository.filter.CatalogFilter;
 import com.crystianemeira.movie_catalog.service.RegisterMovieService;
 
 @Controller
 @RequestMapping("/movies")
 public class MovieController {
-	
-	@Autowired
-	private Movies movies;
 	
 	@Autowired
 	private RegisterMovieService registerMovieService;
@@ -44,9 +41,9 @@ public class MovieController {
 	/**
 	 * Save data about a movie into the database
 	 * 
-	 * @param movie an instance of Movie
-	 * @param errors contains information about the object
-	 * @param attributes used to add attributes to the model
+	 * @param Movie movie an instance of Movie
+	 * @param Errors errors contains information about the object
+	 * @param RedirectAttributes attributes used to add attributes to the model
 	 * 
 	 * @return String the name of the View responsible for registering a new movie
 	 */
@@ -63,13 +60,15 @@ public class MovieController {
 	}
 	
 	/**
-	 * Open the screen that show all the movies
+	 * Find a movie based a filter (if filter is null, an instance is created to make the search)
 	 * 
-	 * @return ModelAndView name of a View responsible for showing the movies and a list of all the movies to fill the View
+	 * @param CatalogFilter filter contains information about the title to be searched
+	 * 
+	 * @return ModelAndView name of a View responsible for showing the movies and a list of all the movies that respect the filter to fill the View
 	 */
 	@RequestMapping
-	public ModelAndView search() {
-		List<Movie> allMovies = movies.findAll();
+	public ModelAndView search(@ModelAttribute("filter") CatalogFilter filter) {
+		List<Movie> allMovies = registerMovieService.filter(filter);
 		return new ModelAndView("SearchMovies").addObject("movies", allMovies);
 	}
 	

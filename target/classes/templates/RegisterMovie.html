@@ -37,7 +37,7 @@
 				<div class="form-group">
 					<label for="status" class="col-sm-1 control-label">Status</label>
 					<div class="col-sm-2">
-						<select class="form-control" name="status">
+						<select class="form-control" name="status" th:field="*{status}" >
 							<option th:each="status : ${allStatusMovie}" th:value="${status}" th:text="${status.description}" />
 						</select>
 					</div>
