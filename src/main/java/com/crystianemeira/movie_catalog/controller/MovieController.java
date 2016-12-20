@@ -41,9 +41,9 @@ public class MovieController {
 	/**
 	 * Save data about a movie into the database
 	 * 
-	 * @param Movie movie an instance of Movie
-	 * @param Errors errors contains information about the object
-	 * @param RedirectAttributes attributes used to add attributes to the model
+	 * @param Movie an instance of Movie
+	 * @param Errors information about the object
+	 * @param RedirectAttributes used to add attributes to the model
 	 * 
 	 * @return String the name of the View responsible for registering a new movie
 	 */
@@ -60,9 +60,9 @@ public class MovieController {
 	}
 	
 	/**
-	 * Find a movie based a filter (if filter is null, an instance is created to make the search)
+	 * Find movies based on a filter (if filter is null, an instance is created to make the search)
 	 * 
-	 * @param CatalogFilter filter contains information about the title to be searched
+	 * @param CatalogFilter contains information about the title or genre to be searched
 	 * 
 	 * @return ModelAndView name of a View responsible for showing the movies and a list of all the movies that respect the filter to fill the View
 	 */
@@ -75,7 +75,7 @@ public class MovieController {
 	/**
 	 * Edit a movie
 	 * 
-	 * @param movie an existing Movie object
+	 * @param Movie an existing Movie object
 	 * 
 	 * @return ModelAndView the View responsible for register a movie
 	 */
@@ -88,8 +88,8 @@ public class MovieController {
 	/**
 	 * Delete a movie
 	 * 
-	 * @param id the id of the movie to delete
-	 * @param attributes used to add attributes to the model
+	 * @param Long the id of the movie to delete
+	 * @param RedirectAttributes used to add attributes to the model
 	 * 
 	 * @return String the name of the View responsible for showing the movies
 	 */
@@ -104,7 +104,7 @@ public class MovieController {
 	/**
 	 * Delete a movie
 	 * 
-	 * @param id the id of the movie to 
+	 * @param Long the id of the movie to change the status
 	 * 
 	 * @return String description about the status of the movie
 	 */

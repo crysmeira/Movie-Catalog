@@ -9,4 +9,6 @@ import com.crystianemeira.movie_catalog.model.Movie;
 public interface Movies extends JpaRepository<Movie, Long> {
 	
 	public List<Movie> findByTitleContaining(String title);
+	
+	public List<Movie> findByGenreContaining(String title);
 }

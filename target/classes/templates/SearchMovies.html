@@ -22,7 +22,22 @@
 				<div class="form-group">
 					<div class="col-sm-4">
 						<div class="input-group">
-							<input class="form-control" placeholder="Which movie are you looking for?" autofocus="autofocus" th:field="*{title}"></input>
+							<input class="form-control" placeholder="Which movie title are you looking for?" th:field="*{title}"></input>
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</form>
+			
+			<form method="GET" class="form-horizontal" action="/movies" th:object="${filter}">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input class="form-control" placeholder="Which genre are you looking for?" th:field="*{genre}"></input>
 							<span class="input-group-btn">
 								<button type="submit" class="btn btn-default">
 									<i class="glyphicon glyphicon-search"></i>

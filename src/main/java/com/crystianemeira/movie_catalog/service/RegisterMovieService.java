@@ -18,7 +18,7 @@ public class RegisterMovieService {
 	/**
 	 * Save data about a movie into the database
 	 * 
-	 * @param movie an instance of Movie
+	 * @param Movie an instance of Movie
 	 */
 	public void save(Movie movie) {
 		movies.save(movie);
@@ -27,7 +27,7 @@ public class RegisterMovieService {
 	/**
 	 * Delete a movie
 	 * 
-	 * @param id the id of the movie to delete
+	 * @param Long the id of the movie to delete
 	 */
 	public void delete(Long id) {
 		movies.delete(id);
@@ -36,7 +36,7 @@ public class RegisterMovieService {
 	/**
 	 * Change the status of a movie from NOT WATCHED to WATCHED
 	 * 
-	 * @param id the id of the movie to be updates
+	 * @param Long the id of the movie to be updated
 	 * 
 	 * @return String description about the status of the movie
 	 */
@@ -48,8 +48,21 @@ public class RegisterMovieService {
 		return StatusMovie.WATCHED.getDescription();
 	}
 	
+	/**
+	 * Return a list of based on a filter, if there is no filter, all movies are returned
+	 * 
+	 * @param CatalogFilter contains information about the title or genre to be searched
+	 * 
+	 * @return List<Movie> list of movies that satisfy the filter
+	 */
 	public List<Movie> filter(CatalogFilter filter) {
-		String title = (filter.getTitle() == null) ? "%" : filter.getTitle();
-		return movies.findByTitleContaining(title);
+		if (filter.getTitle() != null) {
+			return movies.findByTitleContaining(filter.getTitle());
+		} else if (filter.getGenre() != null) {
+			return movies.findByGenreContaining(filter.getGenre());
+		}
+		
+		// return all movies
+		return movies.findByTitleContaining("%");
 	}
 }
