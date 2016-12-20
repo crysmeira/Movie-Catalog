@@ -13,12 +13,12 @@
 		<div class="panel-heading">
 			<div class="clearfix">
 				<h1 class="panel-title movie-panel">Search a movie</h1>
-				<a class="btn btn-link link-panel" href="/movies/new">New movie</a>
+				<a class="btn btn-link link-panel" th:href="@{/movies/new}">New movie</a>
 			</div>
 		</div>
 		
 		<div class="panel-body">
-			<form method="GET" class="form-horizontal" action="/movies" th:object="${filter}">
+			<form method="GET" class="form-horizontal" th:action="@{/movies}" th:object="${filter}">
 				<div class="form-group">
 					<div class="col-sm-4">
 						<div class="input-group">
@@ -33,7 +33,7 @@
 				</div>
 			</form>
 			
-			<form method="GET" class="form-horizontal" action="/movies" th:object="${filter}">
+			<form method="GET" class="form-horizontal" th:action="@{/movies}" th:object="${filter}">
 				<div class="form-group">
 					<div class="col-sm-4">
 						<div class="input-group">
@@ -48,41 +48,43 @@
 				</div>
 			</form>
 		
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th class="text-center col-md-1">#</th>
-						<th>Title</th>
-						<th class="text-center col-md-2">Genre</th>
-						<th class="text-center col-md-2">Status</th>
-						<th class="col-md-1"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="movie : ${movies}">
-						<td class="text-center" th:text="${movie.id}">1</td>
-						<td th:text="${movie.title}"></td>
-						<td class="text-center" th:text="${movie.genre}"></td>
-						<td class="text-center" th:attr="data-role=${movie.id}">
-							<span class="label" th:text="${movie.status.description}" th:classappend="${movie.watched ? 'label-success' : 'label-danger'}"></span>
-						</td>
-						<td class="text-center">
-							<a class="btn btnk-link btn-xs" th:href="@{/movies/{id}(id=${movie.id})}" title="Edit" rel="tooltip" data-placement="top" >
-								<span class="glyphicon glyphicon-pencil"></span>
-							</a>
-							<a class="btn btnk-link btn-xs" data-toggle="modal" data-target="#confirmDeletionModal" th:attr="data-id=${movie.id}, data-title=${movie.title}" title="Remove" rel="tooltip" data-placement="top">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
-							<a class="btn btnk-link btn-xs js-update-status" th:if="${!movie.watched}" title="Check" rel="tooltip" data-placement="top" th:attr="data-id=${movie.id}" th:href="@{/movies/{id}/check(id=${movie.id})}">
-								<span class="glyphicon glyphicon-check"></span>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="6" th:if="${#lists.isEmpty(movies)}">No movie found</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+							<th>Title</th>
+							<th class="text-center col-md-2">Genre</th>
+							<th class="text-center col-md-2">Status</th>
+							<th class="col-md-1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="movie : ${movies}">
+							<td class="text-center" th:text="${movie.id}">1</td>
+							<td th:text="${movie.title}"></td>
+							<td class="text-center" th:text="${movie.genre}"></td>
+							<td class="text-center" th:attr="data-role=${movie.id}">
+								<span class="label" th:text="${movie.status.description}" th:classappend="${movie.watched ? 'label-success' : 'label-danger'}"></span>
+							</td>
+							<td class="text-center">
+								<a class="btn btnk-link btn-xs" th:href="@{/movies/{id}(id=${movie.id})}" title="Edit" rel="tooltip" data-placement="top" >
+									<span class="glyphicon glyphicon-pencil"></span>
+								</a>
+								<a class="btn btnk-link btn-xs" data-toggle="modal" data-target="#confirmDeletionModal" th:attr="data-id=${movie.id}, data-title=${movie.title}" title="Remove" rel="tooltip" data-placement="top">
+									<span class="glyphicon glyphicon-trash"></span>
+								</a>
+								<a class="btn btnk-link btn-xs js-update-status" th:if="${!movie.watched}" title="Check" rel="tooltip" data-placement="top" th:attr="data-id=${movie.id}" th:href="@{/movies/{id}/check(id=${movie.id})}">
+									<span class="glyphicon glyphicon-check"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6" th:if="${#lists.isEmpty(movies)}">No movie found</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		
 		<div layout:include="DialogDeleteMovie"></div>

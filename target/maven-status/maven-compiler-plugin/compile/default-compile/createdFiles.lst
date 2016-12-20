@@ -1,0 +1,9 @@
+com/crystianemeira/movie_catalog/controller/MovieController.class
+com/crystianemeira/movie_catalog/MovieCatalogApplication.class
+com/crystianemeira/movie_catalog/repository/filter/CatalogFilter.class
+com/crystianemeira/movie_catalog/ServletInitializer.class
+com/crystianemeira/movie_catalog/model/StatusMovie.class
+com/crystianemeira/movie_catalog/model/Movie.class
+com/crystianemeira/movie_catalog/service/RegisterMovieService.class
+com/crystianemeira/movie_catalog/MovieCatalogApplication$MvcConfig.class
+com/crystianemeira/movie_catalog/repository/Movies.class

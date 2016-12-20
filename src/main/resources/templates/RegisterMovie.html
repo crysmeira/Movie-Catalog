@@ -7,7 +7,7 @@
 	<title>Add a new movie</title>
 </head>
 <section layout:fragment="content">
-	<form class="form-horizontal" method="POST" action="/movies" th:object="${movie}">
+	<form class="form-horizontal" method="POST" th:action="@{/movies}" th:object="${movie}">
 		<div layout:include="MessageSuccess"></div>
 		<div layout:include="MessageError"></div>
 	
@@ -15,7 +15,7 @@
 			<div class="panel-heading">
 				<div class="clearfix">
 					<h1 class="panel-title movie-panel">New movie</h1>
-					<a class="btn btn-link link-panel" href="/movies">Back to search</a>
+					<a class="btn btn-link link-panel" th:href="@{/movies}">Back to search</a>
 				</div>
 			</div>
 			

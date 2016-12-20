@@ -4,9 +4,11 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width"/>
+	
 	<title>Movie Catalog</title>
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
 	<header layout:include="Header"></header>
@@ -15,8 +17,8 @@
 		<p>Main content</p>
 	</section>
 	
-	<script src="/js/jquery-3.1.1.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/catalog.js"></script>
+	<script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/catalog.js}"></script>
 </body>
 </html>

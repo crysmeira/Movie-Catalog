@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.crystianemeira.movie_catalog.MovieCatalogApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.165 sec - in com.crystianemeira.movie_catalog.MovieCatalogApplicationTests
